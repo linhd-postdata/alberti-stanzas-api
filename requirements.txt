@@ -1,0 +1,5 @@
+connexion[swagger-ui]
+pytorch
+transformers
+uwsgi
+flask_cors

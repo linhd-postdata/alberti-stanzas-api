@@ -1,0 +1,40 @@
+openapi: "3.0.0"
+info:
+  title: Alberti
+  version: "1.0"
+servers:
+  - url: /
+    description: Production server
+  - url: http://localhost:5000/
+    description: Test server
+paths:
+  /analysis:
+    post:
+      summary: Gets the stanzas types for a poem
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              x-body-name: poem
+              type: string
+              format: text
+            example: |+
+              Mientras por competir con tu cabello,
+              oro bruñido al sol relumbra en vano;
+              mientras con menosprecio en medio el llano
+              mira tu blanca frente el lilio bello;
+              
+              mientras a cada labio, por cogello.
+              siguen más ojos que al clavel temprano;
+              y mientras triunfa con desdén lozano
+              del luciente cristal tu gentil cuello
+      description: Gets the stanzas types for a poem
+      operationId: core.get_stanzas
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {0: {'stanza_text': 'Mientras por competir con tu cabello,\noro bruñido al sol relumbra en vano;\nmientras con menosprecio en medio el llano\nmira tu blanca frente el lilio bello;', 'label': 'cuarteto'}, 1: {'stanza_text': 'mientras a cada labio, por cogello.\nsiguen más ojos que al clavel temprano;\ny mientras triunfa con desdén lozano\ndel luciente cristal tu gentil cuello', 'label': 'cuarteto'}}
