@@ -1,5 +1,5 @@
 connexion[swagger-ui]
-pytorch
+torch
 transformers
 uwsgi
 flask_cors
