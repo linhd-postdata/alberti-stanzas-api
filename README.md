@@ -23,25 +23,9 @@ Install requirements:
 pip install requirements.txt
 ```
 
-Or Python API:
+Run the API interface:
 
 ```
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
+connexion run openapi.yml
 
-model = AutoModelForSequenceClassification.from_pretrained("alberti-finetuned", use_auth_token=True)
-
-tokenizer = AutoTokenizer.from_pretrained("alberti-finetuned", local_files_only=True)
-
-sample_stanza = """Mientras por competir con tu cabello,
-oro bruñido al sol relumbra en vano;
-mientras con menosprecio en medio el llano
-mira tu blanca frente el lilio bello;"""
-
-inputs = tokenizer(sample_stanza, return_tensors="pt")
-
-outputs = model(**inputs)
-
-best = pt.argmax(outputs.logits, dim=-1).item()
-
-print(model.config.id2label[best])
 ```
