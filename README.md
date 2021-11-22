@@ -1,4 +1,4 @@
-# ALBERTI fine-tuning for stanza detection
+# API for the ALBERTI model fine-tuned for stanza detection
 
 ## Validation Metrics
 
