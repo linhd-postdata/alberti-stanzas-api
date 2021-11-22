@@ -1,4 +1,4 @@
-# ALBERTI
+# ALBERTI fine-tuning for stanza detection
 
 ## Validation Metrics
 
