@@ -1,18 +1,4 @@
----
-tags: autonlp
-language: unk
-widget:
-- text: "I love AutoNLP 🤗"
-datasets:
-- alvp/autonlp-data-alberti-stanza-names
-co2_eq_emissions: 8.612473981829835
----
-
-# Model Trained Using AutoNLP
-
-- Problem type: Multi-class Classification
-- Model ID: 34318169
-- CO2 Emissions (in grams): 8.612473981829835
+# ALBERTI
 
 ## Validation Metrics
 
@@ -31,10 +17,10 @@ co2_eq_emissions: 8.612473981829835
 
 ## Usage
 
-You can use cURL to access this model:
+Install requirements:
 
 ```
-$ curl -X POST -H "Authorization: Bearer YOUR_API_KEY" -H "Content-Type: application/json" -d '{"inputs": "I love AutoNLP"}' https://api-inference.huggingface.co/models/alvp/autonlp-alberti-stanza-names-34318169
+pip install requirements.txt
 ```
 
 Or Python API:
@@ -42,11 +28,20 @@ Or Python API:
 ```
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-model = AutoModelForSequenceClassification.from_pretrained("alvp/autonlp-alberti-stanza-names-34318169", use_auth_token=True)
+model = AutoModelForSequenceClassification.from_pretrained("alberti-finetuned", use_auth_token=True)
 
-tokenizer = AutoTokenizer.from_pretrained("alvp/autonlp-alberti-stanza-names-34318169", use_auth_token=True)
+tokenizer = AutoTokenizer.from_pretrained("alberti-finetuned", local_files_only=True)
 
-inputs = tokenizer("I love AutoNLP", return_tensors="pt")
+sample_stanza = """Mientras por competir con tu cabello,
+oro bruñido al sol relumbra en vano;
+mientras con menosprecio en medio el llano
+mira tu blanca frente el lilio bello;"""
+
+inputs = tokenizer(sample_stanza, return_tensors="pt")
 
 outputs = model(**inputs)
+
+best = pt.argmax(outputs.logits, dim=-1).item()
+
+print(model.config.id2label[best])
 ```
